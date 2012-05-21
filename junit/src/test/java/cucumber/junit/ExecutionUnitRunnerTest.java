@@ -56,6 +56,6 @@ public class ExecutionUnitRunnerTest {
         // fish out the data from
         Step step = runner.getChildren().get(0);
         String expected = String.format("%s%s(%s)", step.getKeyword(), step.getName(), runner.getDescription());
-        assertEquals("step includes scenario in junit-internal format", expected, runner.describeChild(step).toString());
+        assertEquals("step includes scenario in junit-internal format", expected, runner.describeChild(step).toString().trim());
     }
 }
