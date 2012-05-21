@@ -63,7 +63,7 @@ class ExecutionUnitRunner extends ParentRunner<Step> {
     protected Description describeChild(Step step) {
         Description description = stepDescriptions.get(step);
         if (description == null) {
-            description = createDescription(step.getKeyword() + step.getName(), step);
+            description = createDescription(String.format("%s(%s)", step.getKeyword() + step.getName(), this.description), step);
             stepDescriptions.put(step, description);
         }
         return description;
