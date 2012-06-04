@@ -5,6 +5,7 @@ import cucumber.runtime.model.CucumberFeature;
 import cucumber.runtime.model.CucumberScenario;
 import gherkin.formatter.model.Step;
 import org.junit.Test;
+import org.junit.runner.Description;
 
 import java.util.Collections;
 import java.util.List;
@@ -34,7 +35,14 @@ public class ExecutionUnitRunnerTest {
         Step stepOccurrence2 = runner.getChildren().get(2);
         assertEquals(stepOccurrence1.getName(), stepOccurrence2.getName());
 
-        assertFalse("Descriptions must not be equal.", runner.describeChild(stepOccurrence1).equals(runner.describeChild(stepOccurrence2)));
+
+        // then check that the descriptions are unequal
+        Description runnerDescription = runner.getDescription();
+
+        Description stepDescription1 = runnerDescription.getChildren().get(0);
+        Description stepDescription2 = runnerDescription.getChildren().get(2);
+
+        assertFalse("Descriptions must not be equal.", stepDescription1.equals(stepDescription2));
     }
 
     @Test
@@ -53,9 +61,13 @@ public class ExecutionUnitRunnerTest {
             null
         );
 
-        // fish out the data from
+        // fish out the data from the runner and its description
         Step step = runner.getChildren().get(0);
-        String expected = String.format("%s%s(%s)", step.getKeyword(), step.getName(), runner.getDescription());
-        assertEquals("step includes scenario in junit-internal format", expected, runner.describeChild(step).toString().trim());
+        Description runnerDescription = runner.getDescription();
+
+        Description stepDescription = runnerDescription.getChildren().get(0);
+
+        assertEquals("description includes scenario name as class name", runner.getName(), stepDescription.getClassName());
+        assertEquals("description includes step keyword and name as method name", step.getKeyword() + step.getName(), stepDescription.getMethodName());
     }
 }
