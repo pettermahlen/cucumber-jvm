@@ -99,12 +99,33 @@ public class ProgressFormatter implements Formatter, Reporter, ColorAware {
     }
 
     @Override
+    public void before(Match match, Result result) {
+        handleHook(match, result, "B");
+    }
+
+    @Override
+    public void after(Match match, Result result) {
+        handleHook(match, result, "A");
+    }
+
+    private void handleHook(Match match, Result result, String character) {
+        if (result.getStatus().equals(Result.FAILED)) {
+            if (!monochrome) {
+                ANSI_ESCAPES.get(result.getStatus()).appendTo(out);
+            }
+            out.append(character);
+            if (!monochrome) {
+                AnsiEscapes.RESET.appendTo(out);
+            }
+        }
+    }
+
+    @Override
     public void match(Match match) {
     }
 
     @Override
     public void embedding(String mimeType, InputStream data) {
-
     }
 
     @Override

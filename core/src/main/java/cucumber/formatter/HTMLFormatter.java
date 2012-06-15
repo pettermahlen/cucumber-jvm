@@ -128,6 +128,16 @@ public class HTMLFormatter implements Formatter, Reporter {
     }
 
     @Override
+    public void before(Match match, Result result) {
+        writeToJsReport("before", result);
+    }
+
+    @Override
+    public void after(Match match, Result result) {
+        writeToJsReport("after", result);
+    }
+
+    @Override
     public void match(Match match) {
         writeToJsReport("match", match);
     }

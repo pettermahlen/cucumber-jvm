@@ -1,6 +1,7 @@
 package cucumber.runtime.java;
 
 import cucumber.runtime.HookDefinition;
+import cucumber.runtime.MethodFormat;
 import cucumber.runtime.ScenarioResult;
 import cucumber.runtime.Utils;
 import gherkin.TagExpression;
@@ -27,6 +28,12 @@ public class JavaHookDefinition implements HookDefinition {
 
     Method getMethod() {
         return method;
+    }
+
+    @Override
+    public String getLocation(boolean detail) {
+        MethodFormat format = detail ? MethodFormat.FULL : MethodFormat.SHORT;
+        return format.format(method);
     }
 
     @Override

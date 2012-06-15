@@ -1,5 +1,14 @@
-## [Git master](https://github.com/cucumber/cucumber-jvm/compare/v1.0.7...master)
+## [Git master](https://github.com/cucumber/cucumber-jvm/compare/v1.0.9...master)
 
+* [Core] List legal enum values if conversion fails ([#344](https://github.com/cucumber/cucumber-jvm/issues/344) Aslak Hellesøy)
+* [Weld] Added workaround for [WELD-1119](https://issues.jboss.org/browse/WELD-1119) when running on single core machines. (Aslak Hellesøy)
+
+## [1.0.9](https://github.com/cucumber/cucumber-jvm/compare/v1.0.8...v1.0.9)
+
+* [Core] Exceptions thrown from a step definition are no longer wrapped in CucumberException. (Aslak Hellesøy)
+* [Core] Fixed regression: PendingException was causing steps to fail instead of pending. ([#328](https://github.com/cucumber/cucumber-jvm/issues/328) Aslak Hellesøy)
+* [Java] Missing String.format parameters in DefaultJavaObjectFactory ([#336](https://github.com/cucumber/cucumber-jvm/issues/336) paulkrause88, Aslak Hellesøy)
+* [Core] Exceptions being swallowed if reported in a Hook ([#133](https://github.com/cucumber/cucumber-jvm/issues/133) David Kowis, Aslak Hellesøy)
 * [Core] Added `DataTable.asMaps()` and made all returned lists immutable. (Aslak Hellesøy).
 * [Java] The java-helloworld example has a simple example illustrating data tables and doc strings. (Aslak Hellesøy).
 * [Core] Run scenarios/features by name ([#233](https://github.com/cucumber/cucumber-jvm/issues/233), [#323](https://github.com/cucumber/cucumber-jvm/pull/323) Klaus Bayrhammer)

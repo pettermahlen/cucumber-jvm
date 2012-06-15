@@ -29,15 +29,15 @@ public class Utils {
         }
     }
 
-    public static Object invoke(Object target, Method method, Object... args) {
+    public static Object invoke(Object target, Method method, Object... args) throws Throwable {
         try {
             return method.invoke(target, args);
         } catch (IllegalArgumentException e) {
-            throw new CucumberException("Can't invoke " + MethodFormat.FULL.format(method), e);
+            throw new CucumberException("Failed to invoke " + MethodFormat.FULL.format(method), e);
         } catch (InvocationTargetException e) {
-            throw new CucumberException("Can't invoke " + MethodFormat.FULL.format(method), e.getTargetException());
+            throw e.getTargetException();
         } catch (IllegalAccessException e) {
-            throw new CucumberException("Can't invoke " + MethodFormat.FULL.format(method), e);
+            throw new CucumberException("Failed to invoke " + MethodFormat.FULL.format(method), e);
         }
     }
 }

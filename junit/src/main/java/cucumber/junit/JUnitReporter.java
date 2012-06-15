@@ -124,6 +124,22 @@ class JUnitReporter implements Reporter, Formatter {
     }
 
     @Override
+    public void before(Match match, Result result) {
+        handleHook(match, result);
+    }
+
+    @Override
+    public void after(Match match, Result result) {
+        handleHook(match, result);
+    }
+
+    private void handleHook(Match match, Result result) {
+        if(result.getStatus().equals(Result.FAILED)) {
+            executionUnitNotifier.addFailure(result.getError());
+        }
+    }
+
+    @Override
     public void uri(String uri) {
         formatter.uri(uri);
     }

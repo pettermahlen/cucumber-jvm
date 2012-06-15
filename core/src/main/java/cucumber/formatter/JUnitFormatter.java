@@ -99,6 +99,23 @@ public class JUnitFormatter implements Formatter, Reporter {
         }
     }
 
+    @Override
+    public void before(Match match, Result result) {
+        handleHook(match, result);
+    }
+
+    @Override
+    public void after(Match match, Result result) {
+        handleHook(match, result);
+    }
+
+    private void handleHook(Match match, Result result) {
+        if (result.getStatus().equals(Result.FAILED)) {
+            testCase.results.add(result);
+        }
+
+    }
+
     private void increaseAttributeValue(Element element, String attribute) {
         int value = 0;
         if (element.hasAttribute(attribute)) {

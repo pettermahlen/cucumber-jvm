@@ -162,6 +162,14 @@ public class UsageFormatter implements Formatter, Reporter {
         }
     }
 
+    @Override
+    public void before(Match match, Result result) {
+    }
+
+    @Override
+    public void after(Match match, Result result) {
+    }
+
     private String getStepName() {
         return ((StepDefinitionMatch) match).getStepName();
     }

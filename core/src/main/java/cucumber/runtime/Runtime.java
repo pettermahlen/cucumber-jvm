@@ -6,6 +6,7 @@ import cucumber.runtime.converters.LocalizedXStreams;
 import cucumber.runtime.model.CucumberFeature;
 import cucumber.runtime.snippets.SummaryPrinter;
 import gherkin.I18n;
+import gherkin.formatter.Argument;
 import gherkin.formatter.Formatter;
 import gherkin.formatter.Reporter;
 import gherkin.formatter.model.Comment;
@@ -161,31 +162,38 @@ public class Runtime implements UnreportedStepExecutor {
     }
 
     public void runBeforeHooks(Reporter reporter, Set<Tag> tags) {
-        runHooks(glue.getBeforeHooks(), reporter, tags);
+        runHooks(glue.getBeforeHooks(), reporter, tags, true);
     }
 
     public void runAfterHooks(Reporter reporter, Set<Tag> tags) {
-        runHooks(glue.getAfterHooks(), reporter, tags);
+        runHooks(glue.getAfterHooks(), reporter, tags, false);
     }
 
-    private void runHooks(List<HookDefinition> hooks, Reporter reporter, Set<Tag> tags) {
+    private void runHooks(List<HookDefinition> hooks, Reporter reporter, Set<Tag> tags, boolean isBefore) {
         for (HookDefinition hook : hooks) {
-            runHookIfTagsMatch(hook, reporter, tags);
+            runHookIfTagsMatch(hook, reporter, tags, isBefore);
         }
     }
 
-    private void runHookIfTagsMatch(HookDefinition hook, Reporter reporter, Set<Tag> tags) {
+    private void runHookIfTagsMatch(HookDefinition hook, Reporter reporter, Set<Tag> tags, boolean isBefore) {
         if (hook.matches(tags)) {
             long start = System.nanoTime();
             try {
                 hook.execute(scenarioResult);
             } catch (Throwable t) {
                 skipNextStep = true;
-
                 long duration = System.nanoTime() - start;
+
                 Result result = new Result(Result.FAILED, duration, t, DUMMY_ARG);
                 scenarioResult.add(result);
-                reporter.result(result);
+                addError(t);
+
+                Match match = new Match(Collections.<Argument>emptyList(), hook.getLocation(false));
+                if (isBefore) {
+                    reporter.before(match, result);
+                } else {
+                    reporter.after(match, result);
+                }
             }
         }
     }

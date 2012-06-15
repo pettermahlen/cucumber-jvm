@@ -83,10 +83,20 @@ public class JavaStepDefinitionTest {
 
         Reporter reporter = new Reporter() {
             @Override
+            public void before(Match match, Result result) {
+                throw new UnsupportedOperationException();
+            }
+
+            @Override
             public void result(Result result) {
                 if(result.getError() != null) {
                     throw new RuntimeException(result.getError());
                 }
+            }
+
+            @Override
+            public void after(Match match, Result result) {
+                throw new UnsupportedOperationException();
             }
 
             @Override
