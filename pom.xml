@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>info.cukes</groupId>
     <artifactId>cucumber-jvm</artifactId>
-    <version>1.0.12-SNAPSHOT</version>
+    <version>1.0.12.SZ-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Cucumber-JVM</name>
     <url>http://cukes.info/</url>
@@ -32,10 +32,16 @@
         <url>git://github.com/cucumber/cucumber-jvm.git</url>
     </scm>
     <distributionManagement>
-        <site>
-            <id>cukes.info</id>
-            <url>scp://cukes.info/var/www/cucumber_site/cucumber/jvm/api/${project.version}</url>
-        </site>
+      <repository>
+        <id>internal-releases</id>
+        <name>internal-releases</name>
+        <url>http://nexus.shopzilla.com:2099/nexus/content/repositories/internal-releases/</url>
+      </repository>
+      <snapshotRepository>
+        <id>internal-snapshots</id>
+        <name>internal-releases</name>
+        <url>http://nexus.shopzilla.com:2099/nexus/content/repositories/internal-snapshots/</url>
+      </snapshotRepository>
     </distributionManagement>
     <dependencyManagement>
         <dependencies>
