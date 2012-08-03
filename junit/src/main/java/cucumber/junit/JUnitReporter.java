@@ -44,15 +44,15 @@ class JUnitReporter implements Reporter, Formatter {
         this.ignoredStep = false;
 
         executionUnitNotifier = new EachTestNotifier(runNotifier, executionUnitRunner.getDescription());
-        executionUnitNotifier.fireTestStarted();
+//        executionUnitNotifier.fireTestStarted();
     }
 
     public void finishExecutionUnit() {
-        if (ignoredStep) {
-            executionUnitNotifier.fireTestIgnored();
-        } else {
-            executionUnitNotifier.fireTestFinished();
-        }
+//        if (ignoredStep) {
+//            executionUnitNotifier.fireTestIgnored();
+//        } else {
+//            executionUnitNotifier.fireTestFinished();
+//        }
     }
 
     public void match(Match match) {
