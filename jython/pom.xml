@@ -90,6 +90,7 @@
                             <goal>run</goal>
                         </goals>
                         <configuration>
+                          <skip>true</skip>
                             <target>
                                 <!-- also run the CLI test to ensure that stuff works via the CLI as well -->
                                 <echo message="Running jython tests via the CLI..." />

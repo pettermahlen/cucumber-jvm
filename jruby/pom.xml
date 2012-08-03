@@ -134,6 +134,7 @@
                         <id>deploy-gem</id>
                         <phase>deploy</phase>
                         <configuration>
+                          <skip>true</skip>
                             <target>
 
                                 <!-- install the jruby-openssl gem first! -->

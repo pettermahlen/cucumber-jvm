@@ -145,7 +145,8 @@ I18n.all.each { i18n ->
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <target>
+                          <skip>true</skip>
+                          <target>
                                 <!--
                                 Also run the CLI test to ensure that stuff works via the CLI as well.
                                 This isn't exactly the same as running `groovy bin/cucumber-jvm.groovy`
