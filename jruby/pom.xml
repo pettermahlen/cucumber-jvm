@@ -17,7 +17,7 @@
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-core</artifactId>
         </dependency>
-        <dependency>
+      <dependency>
             <groupId>org.jruby</groupId>
             <artifactId>jruby-complete</artifactId>
             <scope>provided</scope>
@@ -26,7 +26,6 @@
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-deps</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
